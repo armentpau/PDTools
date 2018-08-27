@@ -10,7 +10,11 @@
 	.DESCRIPTION
 		A description of the file.
 #>
-
+#todo
+<#
+rules options:
+	present,absent
+#>
 <#
 	.SYNOPSIS
 		A brief description of the Test-PDCSV function.
@@ -50,9 +54,7 @@ function Test-PDCSV
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[hashtable]$Rules,
-		[switch]$AllowEmptyValue,
-		[switch]$AllowHeadersWithoutRules,
-		[switch]$AllowRulesWithoutHeaders
+		[switch]$DisallowHeadersWithoutRules
 	)
 	
 	BEGIN
@@ -60,37 +62,77 @@ function Test-PDCSV
 		$csvData = Import-Csv $Path
 		$CSVHeader = $csvData[0] | Get-Member | where-object{ $_.MemberType -eq 'NoteProperty' }
 		$headersNotInRules = [System.Collections.ArrayList]@()
-		$headersNotInCSV = [System.Collections.ArrayList]@()
+		$missingHeaders = [System.Collections.arraylist]@()
+		$rulesResults = [pscustomobject]@{
+			"HeadersInRules" = $null
+			"RulesAllPresent" = $null
+			"AllValuesPresent" = $null
+			"CSVValid" = $null
+		}
 	}
 	PROCESS
 	{
-		
 		foreach ($item in $CSVHeader.name)
 		{
 			if ($Rules.$($item))
-			{
-				
+			{	
 			}
 			else
 			{
-				$headersNotInRules.add($item)
+				$headersNotInRules.add($item) | Out-Null
 			}
 		}
+		
 		foreach ($item in $Rules.keys)
 		{
-			if ($CSVHeader.name -contains $item)
-			{
-				
+			if ($CSVHeader -contains $item)
+			{		
 			}
 			else
 			{
-				$headersNotInCSV.add($item)
+				$missingHeaders.add($item)
 			}
+		}
+		
+		if ((($headersNotInRules | measure-object).count -gt 0) -and $DisallowHeadersWithoutRules)
+		{
+			Write-Warning "The CSV file $($Path) has headers which are not defined in the rules. Testing all of the rules now."
+			$rulesResults.HeadersInRules = $false
+		}
+		elseif(($headersNotInRules | measure-object).count -gt 0)
+		{
+			Write-Verbose "The CSV file $($Path) has headers which are not defined in the rules.  The switch DisallowHeadersWithoutRules is not given, therfore processing will continue as normal. Testing all of the rules now."
+			$rulesResults.HeadersInRules = $false
+		}
+		else
+		{
+			Write-Verbose "All the headers in CSV file $($Path) are found in the rules.  Testing all of the rules now."
+			$rulesResults.headersInRules = $true
+		}
+		
+		if (($missingHeaders | measure-object).count -gt 0)
+		{
+			Write-Warning "The CSV file $($Path) has defined headers in the ruleset which are not in the csv file"
+			$rulesResults.rulesallpresent = $false
+		}
+		else
+		{
+			Write-Verbose "All of the headers defined in the rules are present in the CSV file"
+			$rulesResults.rulesallpresent = $true
+		}
+		
+		if ($rulesResults.rulesallpresent -eq $false -or $rulesResults.headersinrules -eq $false)
+		{
+			$rulesResults.csvValid = $false
+		}
+		else
+		{
+			$rulesResults.csvValid = $true
 		}
 	}
 	END
 	{
-		
+		$rulesResults
 	}
 }
 
