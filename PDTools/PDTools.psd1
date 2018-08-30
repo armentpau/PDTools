@@ -19,7 +19,7 @@
 	RootModule = 'PDTools.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0.0'
+	ModuleVersion = '1.0.0.4'
 	
 	# ID used to uniquely identify this module
 	GUID = '64fe20d3-0873-42c4-a72a-c09563e748f7'
@@ -76,7 +76,10 @@
 	NestedModules = @()
 	
 	# Functions to export from this module
-	FunctionsToExport = '*' #For performance, list functions explicitly
+	FunctionsToExport = @(
+		'Test-PDCSV',
+		'Get-PDScriptName'
+	) #For performance, list functions explicitly
 	
 	# Cmdlets to export from this module
 	CmdletsToExport = '*' 

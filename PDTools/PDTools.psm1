@@ -9,17 +9,11 @@
 	 Module Name: PDTools
 	===========================================================================
 #>
-Add-Type @"
-public struct PDCSVVerification{
-	public string
-}
-"@
-$scriptPath = Split-Path $MyInvocation.MyCommand.Path
 
+$scriptPath = Split-Path $MyInvocation.MyCommand.Path
 try
 {
 	Get-ChildItem "$scriptPath\Public" -filter *.ps1 | Select-Object -ExpandProperty FullName | ForEach-Object{
-		$function = Split-Path $_ -Leaf
 		. $_
 	}
 }
@@ -28,4 +22,3 @@ catch
 	Write-Warning "There was an error loading $($function) and the error is $($psitem.tostring())"
 	exit
 }
-
