@@ -78,7 +78,8 @@
 	# Functions to export from this module
 	FunctionsToExport = @(
 		'Test-PDCSV',
-		'Get-PDScriptName'
+		'Get-PDScriptName',
+		'Out-PDLog'
 	) #For performance, list functions explicitly
 	
 	# Cmdlets to export from this module

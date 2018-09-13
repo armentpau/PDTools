@@ -10,9 +10,13 @@
     <File Build="2">PDTools.psd1</File>
     <File Build="0" ExportFunctions="True">PDTools.psm1</File>
     <File Build="1" Shared="False" ReferenceFunction="Invoke-Test-Module_ps1" ExportFunctions="False">Test-Module.ps1</File>
-    <File Build="1">.gitignore</File>
-    <File Build="0" Shared="True" ReferenceFunction="Invoke-Test-PDCsv_ps1" ExportFunctions="True">Public\Test-PDCsv.ps1</File>
-    <File Build="2" Shared="True" ReferenceFunction="Invoke-Get-PDScriptName_ps1" ExportFunctions="False">Public\Get-PDScriptName.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Test-PDCsv_ps1" ExportFunctions="True">Public\Test-PDCsv.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Get-PDScriptName_ps1" ExportFunctions="True">Public\Get-PDScriptName.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Out-PDLog_ps1" ExportFunctions="True">Public\Out-PDLog.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Rename-PDLog_ps1" ExportFunctions="True">Private\Rename-PDLog.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Start-PDArchiveLog_ps1" ExportFunctions="True">Private\Start-PDArchiveLog.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Remove-PDLogFile_ps1" ExportFunctions="True">Private\Remove-PDLogFile.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Write-PDLogStream_ps1" ExportFunctions="False">Private\Write-PDLogStream.ps1</File>
   </Files>
   <StartupScript>C:\Users\949237\Documents\Repos\PDTools\PDTools\Test-Module.ps1</StartupScript>
 </Project>
