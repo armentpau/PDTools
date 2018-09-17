@@ -17,6 +17,9 @@
     <File Build="2" Shared="True" ReferenceFunction="Invoke-Start-PDArchiveLog_ps1" ExportFunctions="True">Private\Start-PDArchiveLog.ps1</File>
     <File Build="2" Shared="True" ReferenceFunction="Invoke-Remove-PDLogFile_ps1" ExportFunctions="True">Private\Remove-PDLogFile.ps1</File>
     <File Build="2" Shared="True" ReferenceFunction="Invoke-Write-PDLogStream_ps1" ExportFunctions="False">Private\Write-PDLogStream.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Test-PDWinRM_ps1" ExportFunctions="False">Public\Test-PDWinRM.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Test-PDIsIP_ps1" ExportFunctions="False">Private\Test-PDIsIP.ps1</File>
+    <File Build="2" Shared="True" ReferenceFunction="Invoke-Test_ps1" ExportFunctions="False">Public\Test.ps1</File>
   </Files>
   <StartupScript>C:\Users\949237\Documents\Repos\PDTools\PDTools\Test-Module.ps1</StartupScript>
 </Project>
